@@ -21,3 +21,19 @@ if [ "$output" == "$expectation" ]; then
 else
     echo "Test failed"
 fi
+
+output=$(./bin/02_odd_even Serios?)
+expectation="NAN"
+if [ "$output" == "$expectation" ]; then
+    echo "Test passed"
+else
+    echo "Test failed"
+fi
+
+output=$(./bin/02_odd_even a)
+expectation="NAN"
+if [ "$output" == "$expectation" ]; then
+    echo "Test passed"
+else
+    echo "Test failed"
+fi

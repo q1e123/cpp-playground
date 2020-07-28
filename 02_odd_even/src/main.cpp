@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <stdexcept>
 
 void printOddOrEven(int number)
 {
@@ -47,9 +48,14 @@ int main(int argc, char *argv[])
 	//number = argv[1]; // No
 	//should use atoi?
 	// or std::stoi?
-
+ 
 	// --------------- stop
-	number = std::stoi(argv[1]);
+	try{
+		number = std::stoi(argv[1]);
+	}catch(const std::invalid_argument& exception){
+		std::cout << "NAN\n";
+		exit(1);
+	}
 	printOddOrEven(number);
 
 	return 0;
