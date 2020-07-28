@@ -50,7 +50,7 @@ int main(int argc, char *argv[])
 	std::cout << argumentAsString << std::endl; // i think this should be removed
 
 	// --------------- stop
-
+	number = std::stoi(argv[1]);
 	printOddOrEven(number);
 
 	return 0;
