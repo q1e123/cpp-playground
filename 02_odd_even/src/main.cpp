@@ -34,6 +34,7 @@ int main(int argc, char *argv[])
 	if (argc <= 1)
 	{
 		printf("No program arguments found.\n");
+		exit(1);
 	}
 	
 	// TODO(Gusti): i don't know why this doesn't work, but someone please FIX it.
@@ -46,8 +47,6 @@ int main(int argc, char *argv[])
 	//number = argv[1]; // No
 	//should use atoi?
 	// or std::stoi?
-
-	std::cout << argumentAsString << std::endl; // i think this should be removed
 
 	// --------------- stop
 	number = std::stoi(argv[1]);
