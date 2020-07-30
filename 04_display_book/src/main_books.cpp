@@ -94,5 +94,14 @@ int main()
 	book1.print();
 	book2.print();
 	book3.print();
+
+	Book book4;
+	book4.id = 3;
+	book4.numAuthors = 0;
+	setBookName(book4, "Clean Architecture: A Craftsman's Guide to Software Structure and Design (Robert C. Martin Series) 1st Edition");
+	author.setName("Robert C. Martin");
+	book4.addAuthor(author);
+	
+	book4.print();
 	return 0;
 }
