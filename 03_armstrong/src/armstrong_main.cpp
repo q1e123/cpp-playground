@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
 	std::string argumentAsString = argv[1];
 	
 	// TODO: read number / cast to integer
-	
+	readNumber = std::stoi(argumentAsString);
 	printIsArmstrong(readNumber);
 	return 0;
 }
