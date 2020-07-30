@@ -3,7 +3,16 @@
 bool isArmstrongNumber(int number)
 {
 	// TODO: implement some functionality to see if this number is an armstrong number
-
+	int number_copy = number;
+	size_t result = 0;
+	while (number_copy != 0){
+		size_t last_digit = number_copy % 10;
+		result += (last_digit * last_digit * last_digit);
+		number_copy /= 10;
+	}
+	if(result == number){
+		return true;
+	}
 	return false;
 }
 
@@ -52,7 +61,7 @@ int main(int argc, char *argv[])
 	std::string argumentAsString = argv[1];
 	
 	// TODO: read number / cast to integer
-
+	
 	printIsArmstrong(readNumber);
 	return 0;
 }
