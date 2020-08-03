@@ -10,7 +10,8 @@ class Matrix
 private:
 	size_t column_count;
 	size_t line_count;
-
+	
+	std::vector<std::string> row;
 	// TODO: store the data
 	// hints: you can use std::string, std::vectors + string, char**, vector<vector<char>>, etc
 public:
@@ -18,19 +19,23 @@ public:
 		// TODO: add functionality
 	{
 		// TODO: add functionality
+		column_count = numColumnsX;
+		line_count = numLinesY;
+		row = std::vector<std::string>(line_count);
 	}
 
 	// Set an entire line
 	void setLine(size_t line_number, const std::string& data)
 	{
+		row[line_number] = data;
 	}
 
 	//OPTIONAL
-	//char getCellXY(size_t x, size_t y, char cell_content)
-	//{
-	//	// TODO: add functionality
-	//	return 0;
-	//}
+	char getCellXY(size_t x, size_t y, char cell_content)
+	{
+		// TODO: add functionality
+		return row[x][y];
+	}
 
 	/**
 		Sets the cell content for a specific cell identified by its coordinates (X and Y)
@@ -55,12 +60,18 @@ public:
 	void setCellXY(size_t x, size_t y, char cell_content)
 	{
 		// TODO: add functionality
+		row[y][x] = cell_content;
 	}
 
 	void print()
 	{
 		// print all lines and columns
 		// TODO: add functionality
+
+		for(auto line : row){
+			std::cout << line << std::endl;
+		}
+		std::cout << std::endl;
 	}
 };
 
