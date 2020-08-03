@@ -27,6 +27,9 @@ public:
 	// Set an entire line
 	void setLine(size_t line_number, const std::string& data)
 	{
+		if(line_number > line_count){
+			return;
+		}
 		row[line_number] = data;
 	}
 
@@ -34,7 +37,10 @@ public:
 	char getCellXY(size_t x, size_t y, char cell_content)
 	{
 		// TODO: add functionality
-		return row[x][y];
+		if(y > line_count || x > column_count){
+			return NULL;
+		}
+		return row[y][x];
 	}
 
 	/**
@@ -60,6 +66,9 @@ public:
 	void setCellXY(size_t x, size_t y, char cell_content)
 	{
 		// TODO: add functionality
+		if(y > line_count || x > column_count){
+			return;
+		}
 		row[y][x] = cell_content;
 	}
 
