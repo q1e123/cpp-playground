@@ -36,12 +36,19 @@ std::vector<Book> readBooksFromTextFile(const std::string& file_name)
 	std::vector<Book> results;
 	// TODO: BEGIN read the file -------------------------------------
 
+	// I can't include a new header here so I am using this to use cin stream to read from a file
+    freopen(file_name.c_str(),"r",stdin);
 
-	// E.g. Book myBook;
-	//		...
-	//		results.emplace_back(myBook);
+	std::string book_name;
+	while(getline(std::cin, book_name)){
+		std::string authors;
+		getline(std::cin, authors);
+		Book book;
+		book.name = book_name;
+		book.authors = authors;
+		results.push_back(book);
+	}
 
-	// TODO: END read file and add to results vector ------------------
 	return results;
 }
 
