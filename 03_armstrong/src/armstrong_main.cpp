@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <string>
 bool isArmstrongNumber(int number)
 {
 	// TODO: implement some functionality to see if this number is an armstrong number
