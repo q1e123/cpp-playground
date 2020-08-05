@@ -6,23 +6,27 @@
 
 #define DEFAULT_SIZE 20
 
-enum POPULATION_STATUS{
-    DEAD = 0,
-    CONSTANT,
+enum Population_Status{
     DYING,
-    GROWTH
+    CONSTANT,
+    GROWING
 };
-
 class World{
 public:
     World(size_t epochs, size_t heigth=DEFAULT_SIZE, size_t width=DEFAULT_SIZE);
 
-   friend std::ostream& operator<<(std::ostream& os, const World& world);
+    void play();
+
+    friend std::ostream& operator<<(std::ostream& os, const World& world);
 
 private:
-    size_t heigth, width, epoch, world_epochs;
-    std::vector<std::vector<POPULATION_STATUS>> map;
-    
+    size_t heigth, width, epochs;
+    std::vector<std::vector<bool>> map;
+
+    void next_generation();
+    size_t get_alive_neighbours(size_t row, size_t column);
+    void make_transition(size_t row, size_t column);    
+    Population_Status get_status(size_t row, size_t column);
 };
 
 #endif

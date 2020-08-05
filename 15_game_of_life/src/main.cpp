@@ -12,10 +12,10 @@ int main(int argc, char **argv)
 	}
 	
 	size_t heigth, width, epochs;
-	heigth = std::stol(argv[1]);
-	width = std::stol(argv[2]);
-	epochs = std::stol(argv[3]);
+	epochs = std::stol(argv[1]);
+	heigth = std::stol(argv[2]);
+	width = std::stol(argv[3]);
 	World world(epochs, heigth, width);
-	std::cout << world;
+	world.play();
 	return 0;
 }
