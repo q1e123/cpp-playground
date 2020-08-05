@@ -9,6 +9,8 @@
 #include "beacon.h"
 #include "pulsar.h"
 #include "pentadecathlon.h"
+#include "glider.h"
+
 
 int main(int argc, char **argv)
 {
@@ -30,9 +32,10 @@ int main(int argc, char **argv)
 
 	//Pulsar *pulsar = new Pulsar(0,0);
 
-	Pentadecathlon *pentadecathlon = new Pentadecathlon(5, 5);
+	//Pentadecathlon *pentadecathlon = new Pentadecathlon(5, 5);
 
-	world.draw(pentadecathlon);
+	Glider *glider = new Glider(2,2);
+	world.draw(glider);
 	
 	
 	
