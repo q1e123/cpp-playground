@@ -92,8 +92,8 @@ size_t World::get_alive_neighbours(size_t row, size_t column){
 void World::draw(Shape *shape){
     std::vector<std::vector<bool>> shape_form = shape->draw();
     size_t x,y;
-    x = shape->get_x();
-    y = shape->get_y();
+    y = shape->get_x();
+    x = shape->get_y();
 
     for(size_t i = 0; i < shape_form.size(); ++i){
         for(size_t j = 0; j < shape_form[i].size(); ++j){

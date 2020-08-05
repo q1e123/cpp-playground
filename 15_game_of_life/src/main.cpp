@@ -8,7 +8,7 @@
 #include "blinker.h"
 #include "beacon.h"
 #include "pulsar.h"
-
+#include "pentadecathlon.h"
 
 int main(int argc, char **argv)
 {
@@ -28,9 +28,11 @@ int main(int argc, char **argv)
 	Blinker *blinker = new Blinker(1, 7);*/
 	//Beacon *beacon = new Beacon(0, 0);
 
-	Pulsar *pulsar = new Pulsar(0,0);
+	//Pulsar *pulsar = new Pulsar(0,0);
 
-	world.draw(pulsar);
+	Pentadecathlon *pentadecathlon = new Pentadecathlon(5, 5);
+
+	world.draw(pentadecathlon);
 	
 	
 	
