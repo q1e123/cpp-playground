@@ -6,6 +6,8 @@
 #include "block.h"
 #include "boat.h"
 #include "blinker.h"
+#include "beacon.h"
+
 int main(int argc, char **argv)
 {
 	if (argc != 4)
@@ -19,13 +21,15 @@ int main(int argc, char **argv)
 	heigth = std::stol(argv[2]);
 	width = std::stol(argv[3]);
 	World world(epochs, heigth, width);
-	Block *block = new Block(0,0);
+	/*Block *block = new Block(0,0);
 	Boat *boat = new Boat(3,3);
-	Blinker *blinker = new Blinker(1, 7);
+	Blinker *blinker = new Blinker(1, 7);*/
+	Beacon *beacon = new Beacon(0, 0);
 
-	world.draw(block);
+	/*world.draw(block);
 	world.draw(boat);
-	world.draw(blinker);
+	world.draw(blinker);*/
+	world.draw(beacon);
 	world.play();
 	return 0;
 }
