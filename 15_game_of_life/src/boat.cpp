@@ -1,5 +1,5 @@
 #include "boat.h"
-#include <iostream>
+
 Boat::Boat(size_t x, size_t y):Shape(x,y){
     
 }

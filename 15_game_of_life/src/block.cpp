@@ -1,5 +1,5 @@
 #include "block.h"
-#include <iostream>
+
 Block::Block(size_t x, size_t y):Shape(x,y){
     
 }

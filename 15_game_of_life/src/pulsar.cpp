@@ -1,5 +1,5 @@
 #include "pulsar.h"
-#include <iostream>
+
 Pulsar::Pulsar(size_t x, size_t y):Shape(x,y){
     
 }

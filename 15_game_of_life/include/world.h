@@ -6,7 +6,14 @@
 
 #include "shape.h"
 #include "block.h"
+
 #define DEFAULT_SIZE 20
+
+#ifdef __linux__
+	#define CLEAR_SCREEN "clear"
+#elif defined _WIN32 || defined _WIN64
+	#define CLEAR_SCREEN "cls"
+#endif
 
 enum Population_Status{
     DYING,
@@ -17,7 +24,7 @@ class World{
 public:
     World(size_t epochs, size_t heigth=DEFAULT_SIZE, size_t width=DEFAULT_SIZE);
 
-    void play();
+    void play(bool animation);
     void draw(Shape *shape);
     friend std::ostream& operator<<(std::ostream& os, const World& world);
 

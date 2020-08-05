@@ -1,10 +1,13 @@
 #include "world.h"
 
+#include <thread>
+#include <chrono>
+
 World::World(size_t epochs, size_t heigths, size_t width){
-   /* if(width < DEFAULT_SIZE || heigth < DEFAULT_SIZE){
+    if(width < DEFAULT_SIZE || heigth < DEFAULT_SIZE){
         std::cerr << "ERROR: choose a grid that is at least 20x20" << std::endl;
         exit(1);
-    }*/
+    }
 
     this->epochs = epochs;
     this->heigth = heigths;
@@ -15,7 +18,7 @@ World::World(size_t epochs, size_t heigths, size_t width){
     map = std::vector<std::vector<bool>>(heigth, std::vector<bool>(width,false)); 
 }
 
-void World::play(){
+void World::play(bool animation){
     std::cout << "Initial state of world: " << std::endl;
     std::cout << *this << std::endl;
 
@@ -24,6 +27,10 @@ void World::play(){
         std::cout << "Epoch " << i << "/" << epochs << ": " << std::endl;
         next_generation();
         std::cout << *this << std::endl;
+        if(animation){
+            std::this_thread::sleep_for (std::chrono::milliseconds(250));
+            system(CLEAR_SCREEN);
+        }
     }
     
 }

@@ -1,5 +1,5 @@
 #include "pentadecathlon.h"
-#include <iostream>
+
 Pentadecathlon::Pentadecathlon(size_t x, size_t y):Shape(x,y){
     
 }

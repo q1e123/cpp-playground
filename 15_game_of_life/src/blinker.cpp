@@ -1,5 +1,4 @@
 #include "blinker.h"
-#include <iostream>
 Blinker::Blinker(size_t x, size_t y):Shape(x,y){
     
 }
