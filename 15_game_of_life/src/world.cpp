@@ -19,7 +19,7 @@ void World::play(){
     std::cout << "Initial state of world: " << std::endl;
     std::cout << *this << std::endl;
 
-    for (size_t i= 1; i < epochs; ++i)
+    for (size_t i= 1; i <= epochs; ++i)
     {
         std::cout << "Epoch " << i << "/" << epochs << ": " << std::endl;
         next_generation();
