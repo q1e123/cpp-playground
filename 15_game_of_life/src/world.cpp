@@ -19,7 +19,7 @@ void World::play(){
     std::cout << "Initial state of world: " << std::endl;
     std::cout << *this << std::endl;
 
-    for (size_t i= 0; i < epochs; ++i)
+    for (size_t i= 1; i < epochs; ++i)
     {
         std::cout << "Epoch " << i << "/" << epochs << ": " << std::endl;
         next_generation();
@@ -82,6 +82,19 @@ size_t World::get_alive_neighbours(size_t row, size_t column){
     // and now I need to take it out
     alive_neighbours -= map[row][column];
     return alive_neighbours;
+}
+
+void World::draw(Shape *shape){
+    std::vector<std::vector<bool>> shape_form = shape->draw();
+    size_t x,y;
+    x = shape->get_x();
+    y = shape->get_y();
+    for(size_t i = 0; i < shape_form.size(); ++i){
+        for(size_t j = 0; j < shape_form[i].size(); ++j){
+            map[x+i][y+j] = shape_form[i][j];
+        }
+    }
+    
 }
 
 std::ostream& operator<<(std::ostream& os, const World& world){

@@ -2,12 +2,14 @@
 #include <string>
 
 #include "world.h"
+#include "shape.h"
+#include "block.h"
 
 int main(int argc, char **argv)
 {
 	if (argc != 4)
 	{
-		std::cerr << "Usage: ./15_game_of_life <heigth> <width> <epochs>" << std::endl;
+		std::cerr << "Usage: ./15_game_of_life <epochs> <heigth> <width>" << std::endl;
 		exit(1);
 	}
 	
@@ -16,6 +18,8 @@ int main(int argc, char **argv)
 	heigth = std::stol(argv[2]);
 	width = std::stol(argv[3]);
 	World world(epochs, heigth, width);
+	Block *block = new Block(3,3);
+	world.draw(block);
 	world.play();
 	return 0;
 }

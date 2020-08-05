@@ -4,6 +4,8 @@
 #include <vector>
 #include <iostream>
 
+#include "shape.h"
+#include "block.h"
 #define DEFAULT_SIZE 20
 
 enum Population_Status{
@@ -16,7 +18,7 @@ public:
     World(size_t epochs, size_t heigth=DEFAULT_SIZE, size_t width=DEFAULT_SIZE);
 
     void play();
-
+    void draw(Shape *shape);
     friend std::ostream& operator<<(std::ostream& os, const World& world);
 
 private:
