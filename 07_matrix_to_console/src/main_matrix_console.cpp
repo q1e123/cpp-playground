@@ -27,7 +27,7 @@ public:
 	// Set an entire line
 	void setLine(size_t line_number, const std::string& data)
 	{
-		if(line_number > line_count){
+		if(line_number >= line_count){
 			return;
 		}
 		row[line_number] = data;
@@ -37,7 +37,7 @@ public:
 	char getCellXY(size_t x, size_t y, char cell_content)
 	{
 		// TODO: add functionality
-		if(y > line_count || x > column_count){
+		if(y >= line_count || x >= column_count){
 			return NULL;
 		}
 		return row[y][x];
@@ -66,7 +66,7 @@ public:
 	void setCellXY(size_t x, size_t y, char cell_content)
 	{
 		// TODO: add functionality
-		if(y > line_count || x > column_count){
+		if(y >= line_count || x >= column_count){
 			return;
 		}
 		row[y][x] = cell_content;
@@ -147,5 +147,8 @@ X-----X----X-----XX-
 
 	// This should silently fail (not trigger an error): cell Y=11 invalid due to limited height.
 	matrix.setCellXY(3, 11, 'O');
+	matrix.setCellXY(20, 10, 'O');
+	matrix.setCellXY(33, 1, 'O');
+
 	return 0;
 }
