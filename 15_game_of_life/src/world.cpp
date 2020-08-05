@@ -91,8 +91,14 @@ void World::draw(Shape *shape){
     size_t x,y;
     x = shape->get_x();
     y = shape->get_y();
+
     for(size_t i = 0; i < shape_form.size(); ++i){
         for(size_t j = 0; j < shape_form[i].size(); ++j){
+            if(x+i > heigth-1 || y+j > width-1){
+                std::cerr << "ERROR: tried to draw outside the world\n";
+                exit(1);
+            }
+
             map[x+i][y+j] = shape_form[i][j];
         }
     }

@@ -6,10 +6,7 @@ Block::Block(size_t x, size_t y):Shape(x,y){
 
 std::vector<std::vector<bool>> Block::draw(){
     std::vector<std::vector<bool>> shape(2,std::vector<bool>(2));
-    for(size_t i = 0; i < shape.size(); ++i){
-        for(size_t j = 0; j < shape[i].size(); ++j){
-            shape[i][j] = true;
-        }
-    }
+    shape[0] = {1, 1};
+    shape[1] = {1, 1};
     return shape;
 }

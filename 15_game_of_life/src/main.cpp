@@ -4,7 +4,7 @@
 #include "world.h"
 #include "shape.h"
 #include "block.h"
-
+#include "boat.h"
 int main(int argc, char **argv)
 {
 	if (argc != 4)
@@ -19,7 +19,9 @@ int main(int argc, char **argv)
 	width = std::stol(argv[3]);
 	World world(epochs, heigth, width);
 	Block *block = new Block(0,0);
+	Boat *boat = new Boat(3,3);
 	world.draw(block);
+	world.draw(boat);
 	world.play();
 	return 0;
 }
