@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 	heigth = std::stol(argv[2]);
 	width = std::stol(argv[3]);
 	World world(epochs, heigth, width);
-	Block *block = new Block(3,3);
+	Block *block = new Block(0,0);
 	world.draw(block);
 	world.play();
 	return 0;

@@ -1,10 +1,10 @@
 #include "world.h"
 
 World::World(size_t epochs, size_t heigths, size_t width){
-    if(width < DEFAULT_SIZE || heigth < DEFAULT_SIZE){
+   /* if(width < DEFAULT_SIZE || heigth < DEFAULT_SIZE){
         std::cerr << "ERROR: choose a grid that is at least 20x20" << std::endl;
         exit(1);
-    }
+    }*/
 
     this->epochs = epochs;
     this->heigth = heigths;
@@ -71,13 +71,15 @@ Population_Status World::get_status(size_t row, size_t column){
 }
 
 size_t World::get_alive_neighbours(size_t row, size_t column){
-    size_t alive_neighbours = 0; 
-    for (size_t i = -1; i <= 1; ++i){
-        for (size_t j = -1; j <= 1; ++j){
+    size_t alive_neighbours = 0;
+    for (int i = -1; i <= 1; ++i){
+        for (int j = -1; j <= 1; ++j){
+            if(row - i < 0 || row + i > heigth-1 || column -j < 0 || column +j > width-1){
+                continue;
+            }
             alive_neighbours += map[row + i][column + j];
         } 
     } 
-
     // I've skipped doing the if in the fors so the population it self was added to the neighbours
     // and now I need to take it out
     alive_neighbours -= map[row][column];
