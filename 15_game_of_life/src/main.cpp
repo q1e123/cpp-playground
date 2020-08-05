@@ -7,6 +7,8 @@
 #include "boat.h"
 #include "blinker.h"
 #include "beacon.h"
+#include "pulsar.h"
+
 
 int main(int argc, char **argv)
 {
@@ -24,12 +26,14 @@ int main(int argc, char **argv)
 	/*Block *block = new Block(0,0);
 	Boat *boat = new Boat(3,3);
 	Blinker *blinker = new Blinker(1, 7);*/
-	Beacon *beacon = new Beacon(0, 0);
+	//Beacon *beacon = new Beacon(0, 0);
 
-	/*world.draw(block);
-	world.draw(boat);
-	world.draw(blinker);*/
-	world.draw(beacon);
+	Pulsar *pulsar = new Pulsar(0,0);
+
+	world.draw(pulsar);
+	
+	
+	
 	world.play();
 	return 0;
 }

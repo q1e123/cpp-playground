@@ -111,7 +111,15 @@ void World::draw(Shape *shape){
 std::ostream& operator<<(std::ostream& os, const World& world){
     for(size_t i = 0; i < world.heigth; ++i){
         for(size_t j = 0; j < world.width; ++j){
-            os << world.map[i][j] << " ";
+            char c;
+            if(world.map[i][j]){
+                c = '#';
+            }else{
+                c = '_';            
+            }
+            
+
+            os << c << " ";
         }
         os << std::endl;
     }
