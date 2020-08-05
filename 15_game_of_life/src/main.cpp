@@ -5,6 +5,7 @@
 #include "shape.h"
 #include "block.h"
 #include "boat.h"
+#include "blinker.h"
 int main(int argc, char **argv)
 {
 	if (argc != 4)
@@ -20,8 +21,11 @@ int main(int argc, char **argv)
 	World world(epochs, heigth, width);
 	Block *block = new Block(0,0);
 	Boat *boat = new Boat(3,3);
+	Blinker *blinker = new Blinker(1, 7);
+
 	world.draw(block);
 	world.draw(boat);
+	world.draw(blinker);
 	world.play();
 	return 0;
 }

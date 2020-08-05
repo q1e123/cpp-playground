@@ -23,7 +23,7 @@ public:
 
 private:
     size_t heigth, width, epochs;
-    std::vector<std::vector<bool>> map;
+    std::vector<std::vector<bool>> map, future;
 
     void next_generation();
     size_t get_alive_neighbours(size_t row, size_t column);
