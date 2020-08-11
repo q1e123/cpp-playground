@@ -20,9 +20,11 @@ private:
 
 	sf::Color living_cell_color_;
 	sf::Color dead_cell_color_;
-	sf::Text gui_text_;
+	sf::Text gui_text_, epoch_text;
 	sf::Font font_;
-	
+	size_t current_epoch;	
+	long epochs;
+
 	World *world;
 
 public:

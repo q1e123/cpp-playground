@@ -24,6 +24,7 @@ SfmlApp::SfmlApp(
 	: window_({ window_size.first, window_size.second }, "My window")
 	, cell_size_(cell_size)
 {
+	current_epoch = 0;
 }
 
 SfmlApp::~SfmlApp()
@@ -75,6 +76,12 @@ void SfmlApp::init()
 		gui_text_.move(10, 2);
 		gui_text_.setCharacterSize(24);
 		gui_text_.setOutlineColor(sf::Color::White);
+
+		epoch_text.setFont(font_);
+		epoch_text.setString("Waiting to start");
+		epoch_text.move(10, 30);
+		epoch_text.setCharacterSize(12);
+		epoch_text.setOutlineColor(sf::Color::White);
 	}
 	else
 	{
@@ -91,7 +98,6 @@ void SfmlApp::init()
 	size_t max_height = static_cast<size_t>(window_.getView().getSize().y);
 
 	// Store the world size for later use.
-	long epochs;
 	std::string epochs_str = ini.GetValue("world", "epochs");
 	if(epochs_str == "inf"){
 		epochs = -1;
@@ -254,19 +260,33 @@ void SfmlApp::render()
 
 	// Add any GUI info.
 	window_.draw(gui_text_);
+	window_.draw(epoch_text);
 }
 
 void SfmlApp::updateWorld()
 {
-	world->next_generation();
-	std::vector<std::vector<bool>> map = world->get_map();
-	for(size_t i = 0; i < world_size_.first; ++i){
-        for(size_t j = 0; j < world_size_.second; ++j){
-            if(map[i][j]){
-				setCellColor(i, j + OFFSET, living_cell_color_);
-            }else{
-				setCellColor(i, j + OFFSET, dead_cell_color_);
-            }
-        }
+	if(epochs < 0 || current_epoch <= epochs){
+		world->next_generation();
+		std::vector<std::vector<bool>> map = world->get_map();
+		for(size_t i = 0; i < world_size_.first; ++i){
+			for(size_t j = 0; j < world_size_.second; ++j){
+				if(map[i][j]){
+					setCellColor(i, j + OFFSET, living_cell_color_);
+				}else{
+					setCellColor(i, j + OFFSET, dead_cell_color_);
+				}
+			}
+			std::string end;
+			if(epochs < 0){
+				end = "inf";
+			}else{
+				end = std::to_string(epochs);
+			}
+			std::string epoch_string = "Epoch " + std::to_string(current_epoch) + "/ " + end;
+			epoch_text.setString(epoch_string);
+
+		}
+		++current_epoch;
 	}
+	
 }
