@@ -118,7 +118,40 @@ void SfmlApp::init()
 	Glider *glider = new Glider(2,2);
 
 	std::vector<Shape*> shapes;
-	shapes.push_back(glider);
+
+	CSimpleIniA::TNamesDepend keys;
+	ini.GetAllKeys("initial_state", keys);
+
+	for(auto key:keys){
+		Shape *shape;
+		size_t x,y;
+		std::string shape_str = key.pItem;
+		std::string pos = ini.GetValue("initial_state", key.pItem);
+		std::istringstream iss_pos(pos);
+		std::string tmp_str;
+		iss_pos >> tmp_str;
+		x = std::stol(tmp_str);
+		iss_pos >> tmp_str;
+		y = std::stol(tmp_str);
+
+		if(shape_str == "beacon"){
+			shape = new Beacon(x,y);
+		}else if(shape_str == "blinker"){
+			shape = new Blinker(x,y);
+		}else if(shape_str == "block"){
+			shape = new Block(x,y);
+		}else if(shape_str == "boat"){
+			shape = new Boat(x,y);
+		}else if(shape_str == "glider"){
+			shape = new Glider(x,y);
+		}else if(shape_str == "pentadecathlon"){
+			shape = new Pentadecathlon(x,y);
+		}else if(shape_str == "pulsar"){
+			shape = new Pulsar(x,y);
+		}
+
+		shapes.push_back(shape);
+	}
 
 	for(auto shape : shapes){
 		world->draw(shape);
