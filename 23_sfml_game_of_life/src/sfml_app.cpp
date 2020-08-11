@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <thread>
+#include <sstream>
+#include <array>
 
 #include "shape.h"
 #include "block.h"
@@ -11,6 +13,7 @@
 #include "pulsar.h"
 #include "pentadecathlon.h"
 #include "glider.h"
+#include "SimpleIni.h"
 
 #define OFFSET 10
 
@@ -39,8 +42,31 @@ std::string getMessageForActiveStatus(bool active)
 
 void SfmlApp::init()
 {
-	this->living_cell_color_ = sf::Color(40, 160, 20);
-	this->dead_cell_color_ = sf::Color(25, 23, 21);
+	CSimpleIniA ini;
+	if (ini.LoadFile("../../data/23_sfml_game_of_life.ini") < 0) {
+		std::cerr << "Can't open file" << std::endl;
+		exit(1);
+	}
+	std::string living_cell_color_string = ini.GetValue("graphics", "living_cell_color_");
+	std::string dead_cell_color_string = ini.GetValue("graphics", "dead_cell_color_");
+
+    std::istringstream iss_living_cell(living_cell_color_string);
+    std::string amount_string;    
+	std::array<size_t, 3> color_living;
+	size_t i = 0;
+    while (getline(iss_living_cell, amount_string, ',')) {
+       color_living[i] = std::stol(amount_string);
+		++i;
+    }
+	std::istringstream iss_dead_cell(dead_cell_color_string);
+	std::array<size_t, 3> color_dead;
+	i = 0;
+    while (getline(iss_dead_cell, amount_string, ',')) {
+		color_dead[i] = std::stol(amount_string);
+		++i;
+    }
+	this->living_cell_color_ = sf::Color(color_living[0], color_living[1], color_living[2]);
+	this->dead_cell_color_ = sf::Color(color_dead[0], color_dead[1], color_dead[2]);
 
 	if (font_.loadFromFile("../../data/OpenSans-Regular.ttf"))
 	{
@@ -65,9 +91,22 @@ void SfmlApp::init()
 	size_t max_height = static_cast<size_t>(window_.getView().getSize().y);
 
 	// Store the world size for later use.
-	world_size_.first = max_width / cell_size_.first - 1;
-	world_size_.second = max_height / cell_size_.second - 1;
+	long epochs;
+	std::string epochs_str = ini.GetValue("world", "epochs");
+	if(epochs_str == "inf"){
+		epochs = -1;
+	}else{
+	 	epochs = std::stol(epochs_str); 
+	}
+	size_t size_x = std::stol(ini.GetValue("world", "size_x"));
+	size_t size_y = std::stol(ini.GetValue("world", "size_y"));
+	duration_in_millis_between_updates = std::stol(ini.GetValue("graphics", "duration_in_millis_between_updates"));
 
+
+	world_size_.first = size_x;
+	world_size_.second = size_y;
+
+	std::cout <<world_size_.first << " " << world_size_.second << std::endl;
 	world = new World(25,world_size_.first, world_size_.second);
 
 	Glider *glider = new Glider(2,2);
@@ -94,7 +133,6 @@ void SfmlApp::run()
 	unsigned time_elapsed_since_update = 0;
 	bool simulation_active(true);
 	// TODO: it would be nice to make this configurable in the future.
-	unsigned duration_in_millis_between_updates = 1000;
 
 	// run the program as long as the window is open
 	while (window_.isOpen())
@@ -140,7 +178,6 @@ void SfmlApp::run()
 					unsigned clicked_cell_x = event.mouseButton.x * view_width / (cell_size_.first * win_width);
 					unsigned clicked_cell_y = event.mouseButton.y * view_height / (cell_size_.second * win_height);
 
-					// TODO: maybe update a world matrix?
 					world->set_cell(clicked_cell_x,clicked_cell_y);
 					setCellColor(clicked_cell_x, clicked_cell_y, living_cell_color_);
 				}
@@ -221,7 +258,6 @@ void SfmlApp::render()
 
 void SfmlApp::updateWorld()
 {
-	// TODO: feel free to add function arguments as deemed necessary.
 	world->next_generation();
 	std::vector<std::vector<bool>> map = world->get_map();
 	for(size_t i = 0; i < world_size_.first; ++i){

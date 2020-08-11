@@ -11,6 +11,8 @@
 class SfmlApp
 {
 private:
+	unsigned duration_in_millis_between_updates;
+
 	sf::RenderWindow window_;
 	std::vector<sf::Vertex> cell_vertices_;
 	std::pair<unsigned int, unsigned int> cell_size_;
@@ -20,7 +22,7 @@ private:
 	sf::Color dead_cell_color_;
 	sf::Text gui_text_;
 	sf::Font font_;
-
+	
 	World *world;
 
 public:
