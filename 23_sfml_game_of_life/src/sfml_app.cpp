@@ -12,6 +12,8 @@
 #include "pentadecathlon.h"
 #include "glider.h"
 
+#define OFFSET 10
+
 SfmlApp::SfmlApp(
 	std::pair<unsigned int, unsigned int> window_size,
 	std::pair<unsigned int, unsigned int> cell_size
@@ -225,9 +227,9 @@ void SfmlApp::updateWorld()
 	for(size_t i = 0; i < world_size_.first; ++i){
         for(size_t j = 0; j < world_size_.second; ++j){
             if(map[i][j]){
-				setCellColor(i, j, living_cell_color_);
+				setCellColor(i, j + OFFSET, living_cell_color_);
             }else{
-				setCellColor(i, j, dead_cell_color_);
+				setCellColor(i, j + OFFSET, dead_cell_color_);
             }
         }
 	}
