@@ -3,6 +3,15 @@
 #include <iostream>
 #include <thread>
 
+#include "shape.h"
+#include "block.h"
+#include "boat.h"
+#include "blinker.h"
+#include "beacon.h"
+#include "pulsar.h"
+#include "pentadecathlon.h"
+#include "glider.h"
+
 SfmlApp::SfmlApp(
 	std::pair<unsigned int, unsigned int> window_size,
 	std::pair<unsigned int, unsigned int> cell_size
@@ -57,6 +66,17 @@ void SfmlApp::init()
 	world_size_.first = max_width / cell_size_.first - 1;
 	world_size_.second = max_height / cell_size_.second - 1;
 
+	world = new World(25,world_size_.first, world_size_.second);
+
+	Glider *glider = new Glider(2,2);
+
+	std::vector<Shape*> shapes;
+	shapes.push_back(glider);
+
+	for(auto shape : shapes){
+		world->draw(shape);
+	}
+	
 	// Initialize the world map with vertices.
 	for (size_t cell_y = 0; cell_y < max_height / cell_size_.first - 1; cell_y++)
 	{
@@ -119,6 +139,7 @@ void SfmlApp::run()
 					unsigned clicked_cell_y = event.mouseButton.y * view_height / (cell_size_.second * win_height);
 
 					// TODO: maybe update a world matrix?
+					world->set_cell(clicked_cell_x,clicked_cell_y);
 					setCellColor(clicked_cell_x, clicked_cell_y, living_cell_color_);
 				}
 			}
@@ -199,6 +220,15 @@ void SfmlApp::render()
 void SfmlApp::updateWorld()
 {
 	// TODO: feel free to add function arguments as deemed necessary.
-
-	setCellColor(rand() % world_size_.first, rand() % world_size_.second, living_cell_color_);
+	world->next_generation();
+	std::vector<std::vector<bool>> map = world->get_map();
+	for(size_t i = 0; i < world_size_.first; ++i){
+        for(size_t j = 0; j < world_size_.second; ++j){
+            if(map[i][j]){
+				setCellColor(i, j, living_cell_color_);
+            }else{
+				setCellColor(i, j, dead_cell_color_);
+            }
+        }
+	}
 }

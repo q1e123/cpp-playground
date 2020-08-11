@@ -41,3 +41,4 @@ ENDIF()
 
 ADD_SUBDIRECTORY(21_sample_feline)
 ADD_SUBDIRECTORY(22_sample_kitty_exe)
+ADD_SUBDIRECTORY(23_sfml_game_of_life)

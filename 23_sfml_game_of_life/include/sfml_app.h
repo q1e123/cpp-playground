@@ -7,6 +7,7 @@
 // SFML headers
 #include "SFML/Graphics.hpp"
 
+#include "world.h"
 class SfmlApp
 {
 private:
@@ -19,6 +20,8 @@ private:
 	sf::Color dead_cell_color_;
 	sf::Text gui_text_;
 	sf::Font font_;
+
+	World *world;
 
 public:
 	/**
