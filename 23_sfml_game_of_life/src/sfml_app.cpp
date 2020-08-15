@@ -15,7 +15,6 @@
 #include "glider.h"
 #include "SimpleIni.h"
 
-#define OFFSET 10
 
 SfmlApp::SfmlApp(
 	std::pair<unsigned int, unsigned int> window_size,
