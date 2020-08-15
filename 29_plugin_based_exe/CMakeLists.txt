@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 
 # Create variable containing project name. We'll be using this in several places and it helps with copy-pasting into a new project.
 # For simplicity this should match the directory name.
-SET(PROJECT_NAME "26_shared_cats")
+SET(PROJECT_NAME "29_plugin_based_exe")
 
 # set project name
 PROJECT(${PROJECT_NAME})
@@ -21,9 +21,26 @@ include_directories(
 	../25_shared_lion_lib/include # Use this library
 	../thirdparty/simpleini 
 )
+
+SET (GUSLIB_SOURCE_FILES
+	"./src/guslib/common/simpleexception.cpp"
+	"./src/guslib/system/dynamiclibmanager.cpp"
+	"./src/guslib/system/dynamiclib.cpp"
+	"./src/guslib/util/stringutil.cpp"
+)
+
 # or we can use file(GLOB ...) for wildcard additon (add any file ending with '.h')
 FILE(GLOB HEADER_FILES "include/*.h")
-FILE(GLOB SRC_FILES "src/*.cpp")
+
+FILE(GLOB SRC_FILES 
+	"./src/domestic_cat.cpp"
+	"./src/feline_factory.cpp"
+	"./src/feline_reader.cpp"
+	"./src/main.cpp"
+	${GUSLIB_SOURCE_FILES}
+) 
+
+source_group("guslib" FILES ${GUSLIB_SOURCE_FILES})
 
 # specify where to generate the executable file
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY}/bin)
@@ -39,4 +56,4 @@ ADD_EXECUTABLE(${PROJECT_NAME} ${HEADER_FILES} ${SRC_FILES})
 # Note the cats_lib project shall generate a "feline_lib.lib" and "feline_lib.dll" files.
 # That's the name of the dependency we need to use.
 # Using the same name (E.g. see cats_domestic_lib) makes it easier to handle.
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 25_shared_lion_lib)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} 24_shared_feline_lib)

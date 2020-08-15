@@ -1,29 +1,29 @@
 #include "kitty.h"
 
-Kitty::Kitty(const std::string& name, const std::string& species)
+DomesticCat::DomesticCat(const std::string& name, const std::string& species)
 	: name_(name)
 	, species_(species)
 {
 
 }
 
-Kitty::~Kitty()
+DomesticCat::~DomesticCat()
 {
 
 }
 
-std::string Kitty::get_description()
+std::string DomesticCat::get_description()
 {
 	return "kitty";
 }
 
-std::ostream& operator<<(std::ostream& os, const Kitty& kitty)
+std::ostream& operator<<(std::ostream& os, const DomesticCat& kitty)
 {
 	os << kitty.name_ << " specimen of " << kitty.species_;
 	return os;
 }
 
-void Kitty::make_sound()
+void DomesticCat::make_sound()
 {
 	std::cout << "Miau" << std::endl;
 }
